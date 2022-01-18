@@ -1,0 +1,303 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Test Template</title>
+<!-- Stylesheets -->
+<!-- <link href="css/bootstrap.css" rel="stylesheet"> -->
+<link href="css/style.css" rel="stylesheet">
+<!-- <link href="css/responsive.css" rel="stylesheet"> -->
+
+<!--Favicon-->
+<!-- <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+<link rel="icon" href="images/favicon.png" type="image/x-icon"> -->
+<!-- Responsive -->
+<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"> -->
+<!--[if lt IE 9]><script src="js/html5shiv.js"></script><![endif]-->
+<!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+
+<script src="https://unpkg.com/vue@next"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+
+</head>
+
+<body>
+
+<!-- Start pagewrapper -->
+<div class="page-wrapper default-version">
+    <!-- Preloader -->
+    <div class="preloader"></div>
+    
+    <div class="page-background">
+        <!-- <div class="image-1"><img src="images/icons/shape/icon-1.png" alt="">1515151</div>
+        <div class="image-7"><img src="images/icons/shape/icon-7.png" alt="">6566666</div> -->
+        <canvas id="canvas"></canvas>
+    </div>
+
+    <div class="card-outer">
+        <div class="scroll-box">
+            <div class="container" data-animation-in="fadeInLeft" data-animation-out="fadeOutLeft">
+                <div class="card-wrapper">
+
+                    <div class="card-inner-box">
+                        <header class="header wow fadeInLeft" data-wow-duration="1.5s">
+                            <ul class="main-menu">
+                                <li class="active home"><a class="logo" href="#home"><img src="images/logo.png" alt=""></a></li>
+                                <li><a href="#about"><i class="flaticon-social"></i>item1</a></li>
+                                <li><a href="#resume"><i class="flaticon-curriculum"></i>item2</a></li>
+                                <li><a href="#services"><i class="flaticon-layers-1"></i>item3</a></li>
+                                <li><a href="#work"><i class="flaticon-tools"></i>item4</a></li>
+                                <li><a href="#blog"><i class="flaticon-blog"></i>item5</a></li>
+                                <li><a href="#contact"><i class="flaticon-send-mail"></i>item6</a></li>
+                                <li><a href="www"><p>item7</p></a></li>
+                            </ul>
+                        </header> 
+                    
+                        <!-- card item -->
+                        <div class="card-home card-item active" id="home" style="background-image:url(images/background/1.jpg)">
+                            <div class="card-inner wow fadeInUp" data-wow-duration="2s">
+                                <div class="image"><img src="images/resource/user.png" alt=""></div>
+
+                                <div class="author">
+                                    <h3>Hally Robot</h3>
+                                    <div class="designation">
+                                        Hi i’m
+                                        <div class="typing-title">
+                                            <p>a <strong>web developer.</strong></p>
+                                            <p>a <strong>web Designer.</strong></p>
+                                            <p>a <strong>photographer.</strong></p>
+                                        </div>
+                                        <span class="typed-title"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- end item -->
+
+                        <!-- card item -->
+                        <div class="card-about card-item" id="about" style="background-image:url(images/background/2.jpg)">
+                            <div class="card-inner">
+                                <h4 class="title">About Me</h4>
+                                <div class="text">Dolor sit amet consectetur elit sed do eiusmod tempor incididunt labore dolore mega aliqua enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip commodo reprehenderit.</div>
+                                <div class="info-list">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <ul class="list-style-one">
+                                                <li><strong>Name:</strong>  Mahira Rashid</li>
+                                                <li><strong>Phone:</strong>  254 - 2563 - 2154</li>
+                                                <li><strong>Address:</strong>  San francisco, USA</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <ul class="list-style-one">
+                                                <li><strong>Email:</strong>  mahirarashid@gmail.com</li>
+                                                <li><strong>Freelance:</strong>  Available</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>                                      
+                            </div>
+                        </div>
+                        <!-- end item -->
+
+                        <!-- card item -->
+                        <!-- /*style="background-image:url(images/background/2.jpg)"*/ -->
+                        <div class="card-resume card-item" id="resume" > 
+                            <div id="app">
+                                <!-- {{ info }} -->
+                            </div>
+                            <!-- style="height: 100%" -->
+                            <div class="container-resume" id="container-resume"></div>
+                            <!-- <div class="card-inner">
+                                <h4 class="title">Resume</h4>
+                            </div> -->
+                        </div>
+                        <!-- end item -->
+
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </div>
+
+</div>
+<!--End pagewrapper-->
+
+<script src="js/jquery.js"></script> 
+<script src="js/particle-alone.js"></script>
+<script src="js/script.js"></script>
+<script>
+    var v1 = null
+    var txt = ''
+    var date = ''
+    var dataObject = {}
+    
+    var dom = document.getElementById("container-resume");
+    var myChart = echarts.init(dom);
+    var option;
+    
+    option = {
+      tooltip: {
+        position: 'top',
+        formatter: function (p) {
+          var format = echarts.format.formatTime('yyyy-MM-dd', p.data[0]);
+          return format + ': ' + p.data[1];
+        }
+      },
+      visualMap: {
+        min: 0,
+        max: 10,
+        calculable: true,
+        orient: 'vertical',
+        left: '660',
+        top: 'center'
+      },
+      calendar: [
+        {
+          orient: 'vertical',
+          range: '2020',
+          cellSize: [20, 'auto'],
+          bottom: 50,
+        },
+        {
+          left: 300,
+          orient: 'vertical',
+          range: '2021',
+          cellSize: [20, 'auto'],
+          bottom: 50,
+        },
+        {
+          left: 520,
+          cellSize: [20, 'auto'],
+          bottom: 50,
+          orient: 'vertical',
+          range: '2022',
+          dayLabel: {
+            margin: 5
+          }
+        }
+      ],
+      series: [
+        {
+          type: 'heatmap',
+          coordinateSystem: 'calendar',
+          calendarIndex: 0,
+          data: getVirtulData('2020',dataObject)
+        },
+        {
+          type: 'heatmap',
+          coordinateSystem: 'calendar',
+          calendarIndex: 1,
+          data: getVirtulData('2021',dataObject)
+        },
+        {
+          type: 'heatmap',
+          coordinateSystem: 'calendar',
+          calendarIndex: 2,
+          data: getVirtulData('2022',dataObject)
+        }
+      ]
+    };
+    
+    function getVirtulData(year,dataObject) {
+      year = year || '2022';
+      var date = +echarts.number.parseDate(year + '-01-01');
+      var end = +echarts.number.parseDate(+year + 1 + '-01-01');
+      var dayTime = 3600 * 24 * 1000;
+      var data = [];
+      var keys = Object.keys(dataObject);
+    
+      for (var time = date; time < end; time += dayTime) {
+        var format_time = echarts.format.formatTime('yyyy-MM-dd', time)
+        if (keys.includes(format_time)) {
+          data.push([
+          format_time,
+          dataObject[format_time]
+        ]);
+        } else {
+          data.push([
+          format_time,
+          0
+        ]);
+        }
+      }
+      return data;
+    }
+    
+    function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+    
+        if (month.length < 2) 
+            month = '0' + month;
+        if (day.length < 2) 
+            day = '0' + day;
+        return [year, month, day].join('-');
+    }
+    
+    const app = {
+      data() {
+        return {
+          info: 'Hello world!!'
+        }
+      },
+      mounted () {
+        axios
+          .get('https://api.github.com/repos/Bernie-cloud/coolwind/commits')//https://api.github.com/users/Bernie-cloud
+          .then(function(response) {
+            // console.log('response');
+            v1 = response;
+            for (key in v1.data) {
+              txt = txt + key + ': ' + v1.data[key] + '\n';
+            }
+            for (var i=0; i<v1.data.length;i++) {
+              var commitDate = new Date(v1.data[i].commit.author.date);
+              // console.log('commitDate',commitDate)
+              // var year = commitDate.getFullYear()
+              // var month = commitDate.getMonth() + 1
+              // var day = commitDate.getDate()
+              // var hours = commitDate.getHours()
+              // var minutes = commitDate.getMinutes()
+              // var seconds = commitDate.getSeconds()
+              // var key = year+'-'+month+'-'+day
+              var key = formatDate(commitDate);
+              var keys = Object.keys(dataObject);
+              // console.log(keys,key,typeof key,bl)
+              if (keys.includes(key)) {
+                dataObject[key] = dataObject[key] + 1;
+              } else {
+                dataObject[key] = 1;
+              }
+              date = date + commitDate + '     \n';
+            }
+          })
+          .then(function() {
+            option.series[0].data = getVirtulData('2020',dataObject)
+            option.series[1].data = getVirtulData('2021',dataObject)
+            option.series[2].data = getVirtulData('2022',dataObject)
+          })
+          // .then(response => (this.info = response))
+          .catch(function (error) { // 请求失败处理
+            console.log('error',error);
+          })
+          .finally(function() {
+            // console.log('final');
+            // document.getElementById("app").innerHTML= v1.data.repos_url + " public repos " + v1.data.public_repos
+            // document.getElementById('app').innerHTML = date;
+            if (option && typeof option === 'object') {
+             myChart.setOption(option);
+             console.log('option=======>',option)
+            }
+          })
+      }
+    }
+    
+    // Vue.createApp(app).mount('#app')
+    </script>
+</body>
+</html>
