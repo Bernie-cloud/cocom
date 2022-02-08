@@ -1,5 +1,3 @@
 # cocom
-fgbfg
-gfbgbf
-gbfgfb
+Hello world
 
