@@ -1,4 +1,2 @@
 # cocom
-Hello world
-
-add label test
+Hello worl
