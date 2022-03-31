@@ -1,4 +1,4 @@
 # cocom
 Hello world
 
-update
+auto update test
